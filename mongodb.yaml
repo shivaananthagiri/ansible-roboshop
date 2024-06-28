@@ -18,7 +18,7 @@
   - name: replaceing with remote acess
     ansible.builtin.replace:
       path: /etc/mongod.conf
-      regexp: '172.31.82.66'
+      regexp: '127.0.0.1'
       replace: '0.0.0.0'
   - name: start and enable mangodb
     ansible.builtin.service:
