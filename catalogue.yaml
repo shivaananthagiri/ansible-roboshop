@@ -9,9 +9,9 @@
       name: nodejs
       state: present
   - name: createing a user with name roboshop
-  ansible.builtin.user:
-    name: roboshop
-   - name: createing a app directory
+    ansible.builtin.user:
+      name: roboshop
+  - name: createing a app directory
     ansible.builtin.file:
       path: /app 
       state: directory
@@ -28,7 +28,7 @@
     ansible.builtin.command: npm install
     args:
       chdir: /app
-      
+
   
 
     
