@@ -48,6 +48,13 @@
     ansible.builtin.package:
       name: mongodb-org-shell
       state: present
+  - name: catagires count
+    ansible.builtin.command: mongo --host mongodb.ananthagiri.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+    register: product_count  
+  - name: printing the product count 
+    ansible.builtin.debug:
+      msg: "product_count:{{product_count}}"
+  
       
 
 
