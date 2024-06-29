@@ -35,11 +35,6 @@
   - name: doing daemon-reload 
     ansible.builtin.systemd_service:
       daemon_reload: true
-      # - name: catalogue restart and enabled
-  #   ansible.builtin.service:
-  #     name: catalogue
-  #     state: restarted
-  #     enabled: yes
   - name: copy mongodb repo
     ansible.builtin.copy:
       src: mongodb.repo
@@ -57,7 +52,11 @@
   - name: load catalogue data
     ansible.builtin.command: mongo --host mongodb.ananthagiri.online < /app/schema/catalogue.js
     when: product_count.stdout == 0
-
+  - name: catalogue restart and enabled
+    ansible.builtin.service:
+      name: catalogue
+      state: restarted
+      enabled: yes
   
 
       
