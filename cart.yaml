@@ -9,7 +9,7 @@
       name: nodejs
       state: present
   - name: createing a cart with name roboshop
-    ansible.builtin.cart:
+    ansible.builtin.user:
       name: roboshop
   - name: createing a app directory
     ansible.builtin.file:
