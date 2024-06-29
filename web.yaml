@@ -1,6 +1,7 @@
 - name: installing web components
   hosts: web
   become: yes
+  tasks:
   - name: installing nginx packages
     ansible.builtin.package:
       name: nginx
