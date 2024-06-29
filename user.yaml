@@ -1,0 +1,70 @@
+- name: installing user
+  hosts: user
+  become: yes
+  tasks:
+  - name: disabled old nodejs and enabled nodejs:18
+    ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
+  - name: installing nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: present
+  - name: createing a user with name roboshop
+    ansible.builtin.user:
+      name: roboshop
+  - name: createing a app directory
+    ansible.builtin.file:
+      path: /app 
+      state: directory
+  - name: downloading user application using a link
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/user.zip
+      dest: /tmp
+  - name: un-ziping a package
+    ansible.builtin.unarchive:
+      src: /tmp/user.zip
+      dest: /app
+      remote_src: yes
+  - name: installing dependencys
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+  - name: copying user.service file
+    ansible.builtin.copy:
+      src: user.service
+      dest: /etc/systemd/system/user.service
+  - name: doing daemon-reload 
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+  - name: copy mongodb repo
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  - name: installing mangodb client
+    ansible.builtin.package:
+      name: mongodb-org-shell
+      state: present
+  - name: catagires count
+    ansible.builtin.command: mongo --host mongodb.ananthagiri.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+    register: user_count  
+  - name: printing the user count 
+    ansible.builtin.debug:
+      msg: "users_count:{{user_count}}"
+  - name: load user data
+    ansible.builtin.command: mongo --host mongodb.ananthagiri.online < /app/schema/user.js
+    when: users_count.stdout == "0"
+  - name: user restart and enabled
+    ansible.builtin.service:
+      name: user
+      state: restarted
+      enabled: yes
+
+  
+
+      
+
+
+
+
+  
+
+    
