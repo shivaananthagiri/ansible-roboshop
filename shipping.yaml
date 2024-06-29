@@ -5,7 +5,7 @@
     mysql_password: RoboShop@1    
   tasks:
   - name: installing maven
-    ansibile.builtin.package: 
+    ansible.builtin.package: 
       name: maven
       state: present
   - name: createing a user with name roboshop
