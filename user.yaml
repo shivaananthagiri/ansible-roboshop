@@ -48,10 +48,10 @@
     register: user_count  
   - name: printing the user count 
     ansible.builtin.debug:
-      msg: "users_count:{{user_count}}"
+      msg: "user_count:{{user_count}}"
   - name: load user data
     ansible.builtin.command: mongo --host mongodb.ananthagiri.online < /app/schema/user.js
-    when: users_count.stdout == "0"
+    when: user_count.stdout == "0"
   - name: user restart and enabled
     ansible.builtin.service:
       name: user
