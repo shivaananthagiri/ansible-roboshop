@@ -5,6 +5,10 @@
   - name: Configure YUM Repos.
     ansible.builtin.command: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 
+
+  - name: Configure YUM rabbitmq.
+    ansible.builtin.command: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
   - name: installing rabitmq
     ansible.builtin.package:
       name: rabbitmq-server
