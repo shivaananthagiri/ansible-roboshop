@@ -32,12 +32,10 @@
     ansible.builtin.copy:
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
-  - name: doing demon-reload 
+  - name: doing daemon-reload 
     ansible.builtin.systemd_service:
       daemon_reload: true
-      state: restarted
-      enabled: yes
-  # - name: catalogue restart and enabled
+      # - name: catalogue restart and enabled
   #   ansible.builtin.service:
   #     name: catalogue
   #     state: restarted
