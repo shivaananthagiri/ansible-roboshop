@@ -47,7 +47,7 @@
     ansible.builtin.shell: mysql -h mysql.ananthagiri.online -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'" 
     register: schema
   - name: load schema
-    ansible.builtin.command: mysql -h mysql.ananthagiri.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql 
+    ansible.builtin.shell: mysql -h mysql.ananthagiri.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql 
     when: schema.stdout != "1"
   - name: restart and enable shipping
     ansible.builtin.service:
