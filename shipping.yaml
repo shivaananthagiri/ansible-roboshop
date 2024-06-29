@@ -4,7 +4,7 @@
   vars:
     mysql_password: RoboShop@1    
   tasks:
-  - name: installing mavin
+  - name: installing maven
     ansibile.builtin.package: 
       name: maven
       state: present
