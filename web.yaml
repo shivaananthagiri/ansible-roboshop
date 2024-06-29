@@ -13,7 +13,7 @@
   - name: create html directory
     ansible.builtin.file:
       path: /usr/share/nginx/html
-      state: present
+      state: directory
   - name: downloading web using url
     ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/web.zip
