@@ -23,7 +23,7 @@
       dest: /app
       remote_src: yes
   - name: installing dependencys
-    ansible.builtin.command: "{{item}}"
+    ansible.builtin.shell: "{{item}}"
     loop:
     - go mod init dispatch
     - go get 
