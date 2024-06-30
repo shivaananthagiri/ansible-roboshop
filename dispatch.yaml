@@ -23,11 +23,11 @@
       dest: /app
       remote_src: yes
   - name: installing dependencys
-    ansible.builtin.command: go {{item}}
+    ansible.builtin.command: "{{item}}"
     loop:
-    - mod init dispatch
-    - get 
-    - build
+    - go mod init dispatch
+    - go get 
+    - go build
     args:
       chdir: /app
     ignore_errors:
