@@ -36,5 +36,5 @@
   - name: dispatch restart and enabled
     ansible.builtin.service:
       name: dispatch
-      state: restarted
+      state: started
       enabled: yes
