@@ -23,11 +23,11 @@
       dest: /app
       remote_src: yes
   - name: installing dependencys
-    ansible.builtin.command: 
-    - go mod init dispatch
-    - go get 
-    - go build
-
+    ansible.builtin.command: go {{item}}
+    loop:
+    - mod init dispatch
+    - get 
+    - build
     args:
       chdir: /app
   - name: doing daemon-reload 
