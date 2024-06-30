@@ -25,7 +25,8 @@
   - name: installing dependencys
     ansible.builtin.command: "{{item}}"
     loop:
-   # - go mod init dispatch
+    - go mod 
+    - init dispatch
     - go get 
     - go build
     args:
@@ -36,6 +37,6 @@
       daemon_reload: true
   - name: dispatch restart and enabled
     ansible.builtin.service:
-      name: golang
-      state: started
+      name: dispatch
+      state: restarted
       enabled: yes
