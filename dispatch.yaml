@@ -36,6 +36,6 @@
       daemon_reload: true
   - name: dispatch restart and enabled
     ansible.builtin.service:
-      name: dispatch
+      name: golang
       state: started
       enabled: yes
