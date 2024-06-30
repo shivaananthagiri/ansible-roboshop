@@ -24,10 +24,14 @@
       remote_src: yes
   - name: installing dependencys
     ansible.builtin.command: "{{item}}"
+    register: output
     loop:
     - go mod init dispatch
     - go get 
     - go build
+  - name: printing the values in loop
+    ansible.builtin.debug:
+      msg: "printing the output:{{output}}"
     args:
       chdir: /app
     ignore_errors: true
