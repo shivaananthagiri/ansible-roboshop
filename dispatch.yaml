@@ -25,13 +25,11 @@
   - name: installing dependencys
     ansible.builtin.command: "{{item}}"
     loop:
-    - go mod 
-    - init dispatch
+    - go mod init dispatch
     - go get 
     - go build
     args:
       chdir: /app
-    ignore_errors:
   - name: doing daemon-reload 
     ansible.builtin.systemd_service:
       daemon_reload: true
